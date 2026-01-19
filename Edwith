@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KA ADMIT | Pre-Primary Books Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/releases/v5.15.4/css/all.min.css">
+    <style>
+        .book-card:hover { transform: translateY(-5px); transition: all 0.3s ease; }
+        .page-section { display: none; }
+        .page-section.active { display: block; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+
+    <!-- Top Ribbon / Navigation -->
+    <nav class="bg-blue-600 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <!-- Logo Placeholder -->
+                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-blue-600 font-bold border-2 border-white overflow-hidden">
+                    LOGO
+                </div>
+                <h1 class="text-2xl font-bold tracking-wider">KA ADMIT</h1>
+            </div>
+            
+            <div class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="#" onclick="showPage('home')" class="hover:underline">Home</a>
+                <a href="#" onclick="showPage('docs')" class="hover:underline">Documentation</a>
+                <a href="#" onclick="showPage('privacy')" class="hover:underline">Privacy Policy</a>
+                <a href="#" onclick="showPage('terms')" class="hover:underline">Terms & Conditions</a>
+                <a href="#" onclick="showPage('refund')" class="hover:underline">Refund & Cancellation</a>
+                <a href="#" onclick="showPage('contact')" class="hover:underline">Contact Us</a>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <button class="bg-white text-blue-600 px-4 py-1 rounded-full font-semibold hover:bg-gray-100">Login</button>
+                <div class="relative cursor-pointer">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-xs rounded-full px-1">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="container mx-auto px-4 py-8">
+
+        <!-- HOME PAGE (Books Listing) -->
+        <section id="home" class="page-section active">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-gray-800">Hamari Pre-Primary Books</h2>
+                <p class="text-gray-600">PG, LKG, aur UKG ke liye behtareen books collection</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6" id="books-grid">
+                <!-- Books will be injected here by JS -->
+            </div>
+        </section>
+
+        <!-- PRIVACY POLICY -->
+        <section id="privacy" class="page-section bg-white p-8 rounded-lg shadow">
+            <h2 class="text-3xl font-bold mb-4">Privacy Policy</h2>
+            <p class="text-gray-700 leading-relaxed">Aapka data hamare liye mahatvapurna hai. Hum KA ADMIT par aapki jaankari ko surakshit rakhte hain. Hum aapka naam aur email sirf order processing ke liye use karte hain.</p>
+        </section>
+
+        <!-- DOCUMENTATION -->
+        <section id="docs" class="page-section bg-white p-8 rounded-lg shadow">
+            <h2 class="text-3xl font-bold mb-4">Documentation</h2>
+            <p class="text-gray-700">Hamari books digital format aur physical format dono mein uplabdha hain. Aap API integration ke liye hamare docs ko refer kar sakte hain (Coming Soon).</p>
+        </section>
+
+        <!-- TERMS & CONDITIONS -->
+        <section id="terms" class="page-section bg-white p-8 rounded-lg shadow">
+            <h2 class="text-3xl font-bold mb-4">Terms & Conditions</h2>
+            <p class="text-gray-700">KA ADMIT se kharidari karte samay aap hamare niyamo ka palan karne ke liye sehemat hain. Books sirf shiksha ke uddeshya se bechi ja rahi hain.</p>
+        </section>
+
+        <!-- REFUND & CANCELLATION -->
+        <section id="refund" class="page-section bg-white p-8 rounded-lg shadow">
+            <h2 class="text-3xl font-bold mb-4">Refund & Cancellation</h2>
+            <p class="text-gray-700">Agar aapko galat product milta hai, toh aap 7 dinon ke andar return request daal sakte hain. Digital products (E-books) ke liye refund uplabdha nahi hai.</p>
+        </section>
+
+        <!-- CONTACT US -->
+        <section id="contact" class="page-section bg-white p-8 rounded-lg shadow text-center">
+            <h2 class="text-3xl font-bold mb-6">Contact Us</h2>
+            <div class="space-y-4">
+                <p class="text-xl"><i class="fas fa-phone text-blue-600 mr-2"></i> <strong>Phone:</strong> +91 8181988353</p>
+                <p class="text-xl"><i class="fas fa-envelope text-blue-600 mr-2"></i> <strong>Email:</strong> akssharma818198@gmail.com</p>
+                <p class="text-gray-500 mt-6">Kripya kisi bhi query ke liye humein call ya email karein.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-10 mt-20">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            <div>
+                <h3 class="text-xl font-bold mb-4">KA ADMIT</h3>
+                <p class="text-gray-400 text-sm">Pre-primary shiksha ke liye Bharat ki bharosemand e-book store.</p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Quick Links</h4>
+                <ul class="text-gray-400 text-sm space-y-2">
+                    <li><a href="#" onclick="showPage('privacy')">Privacy Policy</a></li>
+                    <li><a href="#" onclick="showPage('refund')">Refund Policy</a></li>
+                    <li><a href="#" onclick="showPage('terms')">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Payment Methods</h4>
+                <div class="flex justify-center md:justify-start space-x-4 opacity-50">
+                    <i class="fab fa-cc-visa text-3xl"></i>
+                    <i class="fab fa-cc-mastercard text-3xl"></i>
+                    <i class="fas fa-university text-3xl"></i>
+                </div>
+                <p class="mt-4 text-xs text-gray-500">API integration pending for real transactions.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Logic for Book List and Navigation -->
+    <script>
+        // Pages Navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        // Generate 25 Books Data
+        const classes = ['PG', 'LKG', 'UKG'];
+        const subjects = ['English', 'Hindi', 'Maths', 'GK', 'Drawing', 'Rhymes', 'Writing', 'Numbers'];
+        const booksGrid = document.getElementById('books-grid');
+
+        for (let i = 1; i <= 25; i++) {
+            const cls = classes[Math.floor(Math.random() * classes.length)];
+            const sub = subjects[Math.floor(Math.random() * subjects.length)];
+            const price = Math.floor(Math.random() * (375 - 300 + 1)) + 300; // Price between 300-375
+            
+            const bookHTML = `
+                <div class="bg-white rounded-xl shadow-md overflow-hidden book-card border border-gray-100 flex flex-col">
+                    <div class="h-48 bg-gray-200 flex items-center justify-center relative">
+                        <span class="text-gray-400 italic">Book Cover Image</span>
+                        <div class="absolute top-2 left-2 bg-blue-500 text-white text-xs px-2 py-1 rounded-lg">
+                            ${cls}
+                        </div>
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <h3 class="font-bold text-gray-800 mb-1">${cls} - ${sub} Book Part ${Math.ceil(i/3)}</h3>
+                        <p class="text-sm text-gray-500 mb-3">Complete course for ${cls} students.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold text-blue-600">₹${price}</span>
+                            <span class="text-xs text-green-600 font-semibold">In Stock</span>
+                        </div>
+                    </div>
+                    <div class="p-4 pt-0">
+                        <button onclick="handleOrder(${price})" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium flex items-center justify-center space-x-2">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Order Now</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+            booksGrid.innerHTML += bookHTML;
+        }
+
+        function handleOrder(price) {
+            alert("Payment Gateway API yahan integrate hogi. Price: ₹" + price + "\nKripya apna payment API integrate karein.");
+        }
+    </script>
+</body>
+</html>
