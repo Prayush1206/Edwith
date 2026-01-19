@@ -1,178 +1,326 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edwith | Pre-Primary Books Store</title>
+    <title>Edwith - Bachon Ki Pyari Books</title>
+    <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/releases/v5.15.4/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Animate.css for animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
     <style>
-        .book-card:hover { transform: translateY(-5px); transition: all 0.3s ease; }
-        .page-section { display: none; }
-        .page-section.active { display: block; }
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --dark: #2F2F2F;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f0f9ff;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, .logo {
+            font-family: 'Fredoka One', cursive;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+        }
+
+        .book-card {
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Floating Animation */
+        @keyframes floating {
+            0% { transform: translate(0, 0px); }
+            50% { transform: translate(0, 15px); }
+            100% { transform: translate(0, -0px); }
+        }
+
+        .float-anim {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        #welcomePopup {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .policy-section {
+            display: none;
+        }
     </style>
 </head>
-<body class="bg-gray-50 font-sans">
+<body>
 
-    <!-- Top Ribbon / Navigation -->
-    <nav class="bg-blue-600 text-white shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center">
-            <div class="flex items-center space-x-4">
-                <!-- Logo Placeholder -->
-                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-blue-600 font-bold border-2 border-white overflow-hidden">
-                    LOGO
-                </div>
-                <h1 class="text-2xl font-bold tracking-wider">Edwith</h1>
+    <!-- Start-up Pop-up -->
+    <div id="welcomePopup" class="fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full text-center relative animate__animated animate__zoomIn">
+            <button onclick="closePopup()" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl">
+                <i class="fas fa-times-circle"></i>
+            </button>
+            <div class="text-6xl mb-4 float-anim">📚</div>
+            <h2 class="text-3xl text-red-500 mb-2">Swagat Hai!</h2>
+            <p class="text-gray-600 mb-6">Edwith ki duniya mein aapka swagat hai. Yahan bachon ke liye behatreen kahaniyan aur gyan milta hai!</p>
+            <button onclick="closePopup()" class="bg-red-500 text-white px-8 py-3 rounded-full font-bold hover:bg-red-600 transition shadow-lg">
+                Chalo Shuru Karein!
+            </button>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="gradient-bg text-white sticky top-0 z-50 shadow-xl">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="logo text-3xl tracking-wider flex items-center gap-2">
+                <i class="fas fa-book-open"></i> Edwith
             </div>
             
-            <div class="hidden md:flex space-x-6 text-sm font-medium">
-                <a href="#" onclick="showPage('home')" class="hover:underline">Home</a>
-                <a href="#" onclick="showPage('docs')" class="hover:underline">Documentation</a>
-                <a href="#" onclick="showPage('privacy')" class="hover:underline">Privacy Policy</a>
-                <a href="#" onclick="showPage('terms')" class="hover:underline">Terms & Conditions</a>
-                <a href="#" onclick="showPage('refund')" class="hover:underline">Refund & Cancellation</a>
-                <a href="#" onclick="showPage('contact')" class="hover:underline">Contact Us</a>
+            <div class="hidden md:flex space-x-8 font-semibold">
+                <a href="#" onclick="showPage('home')" class="nav-link">Home</a>
+                <a href="#books" onclick="showPage('home')" class="nav-link">Books</a>
+                <a href="#" onclick="showPage('policies')" class="nav-link">Policies</a>
+                <a href="#" onclick="showPage('contact')" class="nav-link">Contact</a>
             </div>
 
-            <div class="flex items-center space-x-4">
-                <button class="bg-white text-blue-600 px-4 py-1 rounded-full font-semibold hover:bg-gray-100">Login</button>
-                <div class="relative cursor-pointer">
-                    <i class="fas fa-shopping-cart text-xl"></i>
-                    <span class="absolute -top-2 -right-2 bg-red-500 text-xs rounded-full px-1">0</span>
+            <div class="flex items-center gap-4">
+                <button onclick="showPage('login')" class="bg-white text-red-500 px-6 py-2 rounded-full font-bold hover:scale-105 transition">
+                    Login
+                </button>
+                <div class="relative">
+                    <i class="fas fa-shopping-cart text-2xl cursor-pointer"></i>
+                    <span class="absolute -top-2 -right-2 bg-yellow-400 text-xs text-black rounded-full px-1.5 font-bold">0</span>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content Container -->
-    <main class="container mx-auto px-4 py-8">
-
-        <!-- HOME PAGE (Books Listing) -->
-        <section id="home" class="page-section active">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold text-gray-800">Hamari Pre-Primary Books</h2>
-                <p class="text-gray-600">PG, LKG, aur UKG ke liye behtareen books collection</p>
+    <!-- Main Content Area -->
+    <main id="mainContent">
+        
+        <!-- Hero Section (Home) -->
+        <section id="homePage" class="container mx-auto px-6 py-12 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 animate__animated animate__fadeInLeft">
+                <h1 class="text-5xl md:text-7xl text-blue-900 leading-tight mb-6">
+                    Padiye, Sikhiye <br><span class="text-red-500">& Badhiye!</span>
+                </h1>
+                <p class="text-xl text-gray-700 mb-8">Bachon ke liye sabse best aur affordable books ka collection sirf Edwith par.</p>
+                <a href="#books" class="bg-yellow-400 text-blue-900 px-10 py-4 rounded-full text-xl font-bold hover:shadow-2xl transition-all inline-block">
+                    Abhi Kharidein <i class="fas fa-arrow-right ml-2"></i>
+                </a>
             </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6" id="books-grid">
-                <!-- Books will be injected here by JS -->
+            <div class="md:w-1/2 mt-12 md:mt-0 flex justify-center animate__animated animate__fadeInRight">
+                <img src="https://img.freepik.com/free-vector/hand-drawn-world-book-day-illustration_23-2148877243.jpg" alt="Reading Kids" class="rounded-3xl shadow-2xl w-4/5 float-anim">
             </div>
         </section>
 
-        <!-- PRIVACY POLICY -->
-        <section id="privacy" class="page-section bg-white p-8 rounded-lg shadow">
-            <h2 class="text-3xl font-bold mb-4">Privacy Policy</h2>
-            <p class="text-gray-700 leading-relaxed">Aapka data hamare liye mahatvapurna hai. Hum KA ADMIT par aapki jaankari ko surakshit rakhte hain. Hum aapka naam aur email sirf order processing ke liye use karte hain.</p>
+        <!-- Books Section -->
+        <section id="books" class="bg-white py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl text-center text-blue-900 mb-16 underline decoration-yellow-400 decoration-4 underline-offset-8">Hamari Special Books</h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10" id="bookGrid">
+                    <!-- Books will be injected here by JS -->
+                </div>
+            </div>
         </section>
 
-        <!-- DOCUMENTATION -->
-        <section id="docs" class="page-section bg-white p-8 rounded-lg shadow">
-            <h2 class="text-3xl font-bold mb-4">Documentation</h2>
-            <p class="text-gray-700">Hamari books digital format aur physical format dono mein uplabdha hain. Aap API integration ke liye hamare docs ko refer kar sakte hain (Coming Soon).</p>
+        <!-- Login Page (Hidden by default) -->
+        <section id="loginPage" class="hidden py-20 bg-blue-50">
+            <div class="max-w-md mx-auto bg-white rounded-3xl p-10 shadow-2xl animate__animated animate__fadeInUp">
+                <h2 class="text-3xl text-center text-red-500 mb-8">Login Karein</h2>
+                <form onsubmit="event.preventDefault(); alert('Login Successful!'); showPage('home');">
+                    <div class="mb-6">
+                        <label class="block text-gray-700 mb-2 font-bold">Email/Mobile</label>
+                        <input type="text" class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-red-400 outline-none transition" placeholder="Apna detail bhariye" required>
+                    </div>
+                    <div class="mb-8">
+                        <label class="block text-gray-700 mb-2 font-bold">Password</label>
+                        <input type="password" class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-red-400 outline-none transition" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="w-full bg-red-500 text-white py-4 rounded-xl font-bold text-xl hover:bg-red-600 shadow-lg">Pura Karein</button>
+                    <p class="text-center mt-6 text-gray-500">Naye hain? <a href="#" class="text-red-500 font-bold">Account Banayein</a></p>
+                </form>
+            </div>
         </section>
 
-        <!-- TERMS & CONDITIONS -->
-        <section id="terms" class="page-section bg-white p-8 rounded-lg shadow">
-            <h2 class="text-3xl font-bold mb-4">Terms & Conditions</h2>
-            <p class="text-gray-700">KA ADMIT se kharidari karte samay aap hamare niyamo ka palan karne ke liye sehemat hain. Books sirf shiksha ke uddeshya se bechi ja rahi hain.</p>
+        <!-- Policies Page -->
+        <section id="policiesPage" class="hidden py-20 container mx-auto px-6">
+            <div class="bg-white p-10 rounded-3xl shadow-xl">
+                <h2 class="text-4xl text-blue-900 mb-10 text-center">Important Policies</h2>
+                
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl text-red-500 font-bold mb-3">Privacy Policy</h3>
+                        <p class="text-gray-600">Edwith par aapka data surakshit hai. Hum aapki jankari kisi se share nahi karte. Hum sirf order delivery ke liye aapka address mangte hain.</p>
+                    </div>
+                    <hr>
+                    <div>
+                        <h3 class="text-2xl text-red-500 font-bold mb-3">Refund Policy</h3>
+                        <p class="text-gray-600">Agar book kharab ya fati hui milti hai, toh 7 dino ke andar hum use replace kar denge ya aapka pura paisa wapas (refund) mil jayega.</p>
+                    </div>
+                    <hr>
+                    <div>
+                        <h3 class="text-2xl text-red-500 font-bold mb-3">Terms & Conditions</h3>
+                        <p class="text-gray-600">Humari website use karne ka matlab hai ki aap hamari delivery aur payment terms se sehmat hain. Orders 3-5 working days mein deliver hote hain.</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <!-- REFUND & CANCELLATION -->
-        <section id="refund" class="page-section bg-white p-8 rounded-lg shadow">
-            <h2 class="text-3xl font-bold mb-4">Refund & Cancellation</h2>
-            <p class="text-gray-700">Agar aapko galat product milta hai, toh aap 7 dinon ke andar return request daal sakte hain. Digital products (E-books) ke liye refund uplabdha nahi hai.</p>
-        </section>
-
-        <!-- CONTACT US -->
-        <section id="contact" class="page-section bg-white p-8 rounded-lg shadow text-center">
-            <h2 class="text-3xl font-bold mb-6">Contact Us</h2>
-            <div class="space-y-4">
-                <p class="text-xl"><i class="fas fa-phone text-blue-600 mr-2"></i> <strong>Phone:</strong> +91 8181988353</p>
-                <p class="text-xl"><i class="fas fa-envelope text-blue-600 mr-2"></i> <strong>Email:</strong> akssharma818198@gmail.com</p>
-                <p class="text-gray-500 mt-6">Kripya kisi bhi query ke liye humein call ya email karein.</p>
+        <!-- Contact Page -->
+        <section id="contactPage" class="hidden py-20 container mx-auto px-6 text-center">
+            <div class="max-w-2xl mx-auto bg-white p-12 rounded-3xl shadow-2xl border-t-8 border-yellow-400">
+                <h2 class="text-4xl text-blue-900 mb-8">Contact Us</h2>
+                <div class="space-y-6 text-xl">
+                    <p class="flex items-center justify-center gap-4">
+                        <i class="fas fa-phone-alt text-red-500"></i> 
+                        <strong>Phone:</strong> +91 8181988353
+                    </p>
+                    <p class="flex items-center justify-center gap-4">
+                        <i class="fas fa-envelope text-red-500"></i> 
+                        <strong>Email:</strong> akssharma818198@gmail.com
+                    </p>
+                    <p class="flex items-center justify-center gap-4">
+                        <i class="fas fa-map-marker-alt text-red-500"></i> 
+                        <strong>Office:</strong> Main Market, India
+                    </p>
+                </div>
+                <div class="mt-10 flex justify-center gap-6">
+                    <i class="fab fa-facebook text-4xl text-blue-600 cursor-pointer"></i>
+                    <i class="fab fa-instagram text-4xl text-pink-500 cursor-pointer"></i>
+                    <i class="fab fa-whatsapp text-4xl text-green-500 cursor-pointer"></i>
+                </div>
             </div>
         </section>
 
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-10 mt-20">
-        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
-                <h3 class="text-xl font-bold mb-4">KA ADMIT</h3>
-                <p class="text-gray-400 text-sm">Pre-primary shiksha ke liye Bharat ki bharosemand e-book store.</p>
+                <h3 class="text-2xl mb-4 logo tracking-widest text-red-500">EDWITH</h3>
+                <p class="text-gray-400 italic">"Har bacha hai khaas, har book hai uske paas."</p>
             </div>
             <div>
-                <h4 class="font-bold mb-4">Quick Links</h4>
-                <ul class="text-gray-400 text-sm space-y-2">
-                    <li><a href="#" onclick="showPage('privacy')">Privacy Policy</a></li>
-                    <li><a href="#" onclick="showPage('refund')">Refund Policy</a></li>
-                    <li><a href="#" onclick="showPage('terms')">Terms & Conditions</a></li>
+                <h4 class="text-xl font-bold mb-4">Quick Links</h4>
+                <ul class="text-gray-400 space-y-2">
+                    <li><a href="#" onclick="showPage('home')" class="hover:text-white">Home</a></li>
+                    <li><a href="#" onclick="showPage('policies')" class="hover:text-white">Refund Policy</a></li>
+                    <li><a href="#" onclick="showPage('policies')" class="hover:text-white">Terms & Conditions</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="font-bold mb-4">Payment Methods</h4>
-                <div class="flex justify-center md:justify-start space-x-4 opacity-50">
-                    <i class="fab fa-cc-visa text-3xl"></i>
-                    <i class="fab fa-cc-mastercard text-3xl"></i>
-                    <i class="fas fa-university text-3xl"></i>
-                </div>
-                <p class="mt-4 text-xs text-gray-500">API integration pending for real transactions.</p>
+                <h4 class="text-xl font-bold mb-4">Milaap Karein</h4>
+                <p class="text-gray-400">akssharma818198@gmail.com</p>
+                <p class="text-gray-400">+91 8181988353</p>
             </div>
+        </div>
+        <div class="text-center mt-12 pt-8 border-t border-gray-800 text-gray-500">
+            &copy; 2024 Edwith Bookstore. All Rights Reserved.
         </div>
     </footer>
 
-    <!-- Custom Logic for Book List and Navigation -->
+    <!-- JavaScript for Functionality -->
     <script>
-        // Pages Navigation
-        function showPage(pageId) {
-            document.querySelectorAll('.page-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0,0);
+        // Book Data
+        const books = [
+            { id: 1, title: "Jadui Kahaniyan", price: 320, img: "https://img.freepik.com/free-vector/colorful-hand-drawn-world-book-day-illustration_23-2148877242.jpg" },
+            { id: 2, title: "Panchatantra", price: 350, img: "https://img.freepik.com/free-vector/flat-world-book-day-concept_23-2148866731.jpg" },
+            { id: 3, title: "Space Ki Sair", price: 370, img: "https://img.freepik.com/free-vector/outer-space-theme-flat-book-day-illustration_23-2148868770.jpg" },
+            { id: 4, title: "English ABC Fun", price: 300, img: "https://img.freepik.com/free-vector/flat-design-book-day-background_23-2148877232.jpg" },
+            { id: 5, title: "Brave Shivaji", price: 340, img: "https://img.freepik.com/free-vector/reading-concept-illustration_114360-1041.jpg" },
+            { id: 6, title: "Colors & Shapes", price: 310, img: "https://img.freepik.com/free-vector/flat-world-book-day-background_23-2148866725.jpg" },
+            { id: 7, title: "Animal Kingdom", price: 360, img: "https://img.freepik.com/free-vector/hand-drawn-world-book-day-background_23-2148877239.jpg" },
+            { id: 8, title: "Little Scientist", price: 365, img: "https://img.freepik.com/free-vector/creative-reading-concept_23-2148877237.jpg" }
+        ];
+
+        // Close Welcome Popup
+        function closePopup() {
+            const popup = document.getElementById('welcomePopup');
+            popup.classList.add('animate__zoomOut');
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 500);
         }
 
-        // Generate 25 Books Data
-        const classes = ['PG', 'LKG', 'UKG'];
-        const subjects = ['English', 'Hindi', 'Maths', 'GK', 'Drawing', 'Rhymes', 'Writing', 'Numbers'];
-        const booksGrid = document.getElementById('books-grid');
-
-        for (let i = 1; i <= 25; i++) {
-            const cls = classes[Math.floor(Math.random() * classes.length)];
-            const sub = subjects[Math.floor(Math.random() * subjects.length)];
-            const price = Math.floor(Math.random() * (375 - 300 + 1)) + 300; // Price between 300-375
-            
-            const bookHTML = `
-                <div class="bg-white rounded-xl shadow-md overflow-hidden book-card border border-gray-100 flex flex-col">
-                    <div class="h-48 bg-gray-200 flex items-center justify-center relative">
-                        <span class="text-gray-400 italic">Book Cover Image</span>
-                        <div class="absolute top-2 left-2 bg-blue-500 text-white text-xs px-2 py-1 rounded-lg">
-                            ${cls}
-                        </div>
-                    </div>
-                    <div class="p-4 flex-grow">
-                        <h3 class="font-bold text-gray-800 mb-1">${cls} - ${sub} Book Part ${Math.ceil(i/3)}</h3>
-                        <p class="text-sm text-gray-500 mb-3">Complete course for ${cls} students.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xl font-bold text-blue-600">₹${price}</span>
-                            <span class="text-xs text-green-600 font-semibold">In Stock</span>
-                        </div>
-                    </div>
-                    <div class="p-4 pt-0">
-                        <button onclick="handleOrder(${price})" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium flex items-center justify-center space-x-2">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span>Order Now</span>
-                        </button>
-                    </div>
+        // Render Books
+        function renderBooks() {
+            const grid = document.getElementById('bookGrid');
+            grid.innerHTML = books.map(book => `
+                <div class="book-card bg-white rounded-3xl p-4 shadow-lg text-center flex flex-col">
+                    <img src="${book.img}" alt="${book.title}" class="rounded-2xl mb-4 h-48 object-cover w-full">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">${book.title}</h3>
+                    <p class="text-red-500 font-bold text-2xl mb-4">₹${book.price}</p>
+                    <button class="bg-blue-500 text-white py-2 rounded-full font-bold hover:bg-blue-600 transition mt-auto">
+                        Add to Cart
+                    </button>
                 </div>
-            `;
-            booksGrid.innerHTML += bookHTML;
+            `).join('');
         }
 
-        function handleOrder(price) {
-            alert("Payment Gateway API yahan integrate hogi. Price: ₹" + price + "\nKripya apna payment API integrate karein.");
+        // Navigation Management
+        function showPage(pageId) {
+            // Hide all sections
+            document.getElementById('homePage').classList.add('hidden');
+            document.getElementById('books').classList.add('hidden');
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('policiesPage').classList.add('hidden');
+            document.getElementById('contactPage').classList.add('hidden');
+
+            // Show selected section
+            if(pageId === 'home') {
+                document.getElementById('homePage').classList.remove('hidden');
+                document.getElementById('books').classList.remove('hidden');
+            } else {
+                document.getElementById(pageId + 'Page').classList.remove('hidden');
+            }
+
+            // Scroll to top
+            window.scrollTo(0, 0);
         }
+
+        // Initialize on load
+        window.onload = function() {
+            renderBooks();
+            // Optional: Auto-close popup after 10 seconds if user doesn't
+            // setTimeout(closePopup, 10000);
+        };
     </script>
 </body>
 </html>
